@@ -13,10 +13,7 @@ This section describes the steps to install the toolchain in Linux, for dependen
  1. Clone and build ghdl (enable synthesis option)
  2. Clone and build yosis
  3. Clone and build ghdl-yosis-plugin
-
-** Installing dependencies
-I have tried the installation in Ubuntu 20.04 and Fedora 32
-*** Dependencies in Ubuntu
+Default installation path uses /usr/local
 
 #+NAME: dependencies_in_ubuntu
 #+BEGIN_SRC bash
@@ -40,8 +37,6 @@ sudo apt install libboost-dev libboost-filesystem-dev libboost-thread-dev \
 sudo apt install libeigen3-dev
 #+END_SRC
 
-*** Dependencies in Fedora 32
-
 #+NAME: dependencies_in_fedora_32
 #+BEGIN_SRC bash
 # ghdl
@@ -58,12 +53,6 @@ sudo dnf install cmake eigen3-devel libffi-devel boost-program-options \
 #nextpnr
 sudo dnf install boost-devel qt5-devel boost-python3-devel
 #+END_SRC
-
-** Cloning the tools
-
-Next we proceed to clone the different repositories for the different tools compile and install them.
-Default installation path uses /usr/local
-
 
 #+NAME: installation
 #+BEGIN_SRC bash
