@@ -8,14 +8,15 @@
   - CI; vunit_action on github
   - sysnthesis
 ** Directory structure
-Code will be separated in two directories
+Code will be separated in two directories.
 
-| Directory | contents                    |
-|-----------+-----------------------------|
-| ./        | run.py                      |
-| src/      | VHDL sources                |
-| src/test/ | VHDL test bench for sources |
-|-----------+-----------------------------|
+| Directory | contents                    | library     |
+|-----------+-----------------------------+-------------|
+| ./        | run.py                      |             |
+| src/      | VHDL sources                | uart_lib    |
+| src/test/ | VHDL test bench for sources | tb_uart_lib |
+|           |                             |             |
+|-----------+-----------------------------+-------------|
 
 *** Setting up Githuns CI actions
    - [[http://vunit.github.io/blog/2020_08_12_continuous_integration_with_vunit_action_in_10_lines_of_code.html][reference vunit blog]]

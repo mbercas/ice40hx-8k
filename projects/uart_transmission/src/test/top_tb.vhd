@@ -27,6 +27,8 @@ use vunit_lib.check_pkg.all;
 use vunit_lib.logger_pkg.all;
 -- pragma translate_on
 
+library uart_lib;
+
 -------------------------------------------------------------------------------
 
 entity top_tb is
@@ -51,12 +53,12 @@ architecture behav of top_tb is
 begin  -- architecture behav
 
   -- pragma translate_off
-  
+
   -- pragma translate_on
-  
-  
+
+
   -- component instantiation
-  DUT: entity work.top
+  DUT: entity uart_lib.top
     generic map (
       period => period)
     port map (
