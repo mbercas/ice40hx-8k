@@ -1,13 +1,13 @@
 #+TITLE: Adventures in VHLD
 
-◉ Goal of the project
+* Goal of the project
 Refresh my VHDL and make a workflow using
  - emacs (VHDL mode)
  - ghdl as compiler
  - yosys as synthesis tool
  - iCE40-HX8K as development platform
 
-◉ Installing the toolchain
+* Installing the toolchain
 
 This section describes the steps to install the toolchain in Linux, for dependencies refer to the git pages of the pacakges.
  1. Clone and build ghdl (enable synthesis option)
@@ -61,7 +61,7 @@ cd /opt
 sudo mkdir ghdl
 sudo chown manuel:manuel ghdl
 cd ghdl/
-git clone https://github.com/ghdl/ghdl.git 
+git clone https://github.com/ghdl/ghdl.git
 cd ghdl
 ./cofigure --enable-synth
 make
@@ -70,12 +70,12 @@ cd ..
 
 git clone https://github.com/YosysHQ/yosys.git
 cd yosys/
-make 
+make
 sudo make install
-cd .. 
+cd ..
 
 git clone https://github.com/ghdl/ghdl-yosys-plugin.git
-cd 
+cd
 ghdl-yosys-plugin
 make
 sudo make install
@@ -83,7 +83,7 @@ cd ..
 #+END_SRC
 
 *** Install icestorm
-#+BEGIN_SRC 
+#+BEGIN_SRC
 git clone https://github.com/cliffordwolf/icestorm.git icestorm
 cd icestorm
 make -j$(nproc)
@@ -92,7 +92,7 @@ cd ..
 #+END_SRC
 
 Build Place and router for iCE40
-#+BEGIN_SRC 
+#+BEGIN_SRC
 git clone https://github.com/YosysHQ/nextpnr.git
 cd nextpnr
 
@@ -104,18 +104,18 @@ cd ..
 
 
 Install icepack
-#+BEGIN_SRC 
+#+BEGIN_SRC
 sudo apt install fpga-icestorm
 #+END_SRC
 
 in Fedora
-#+BEGIN_SRC 
+#+BEGIN_SRC
 sudo dnf install icestorm
 #+END_SRC
 
 
 * Test with an example
-#+BEGIN_SRC 
+#+BEGIN_SRC
 cd examples/ice40hx8k/leds/
 
 ghdl -a leds.vhdl
@@ -139,18 +139,18 @@ iceprog leds.bin
 ** Problems
 *** nextpnr-ice40 can not find libQt5Core.so.5
 Check if the library is linked and in the right location, install if not there
-#+BEGIN_SRC 
+#+BEGIN_SRC
 ldd /usr/local/bin/nextpnr-ice40
 #+END_SRC
-If the library is there 
-#+BEGIN_SRC 
+If the library is there
+#+BEGIN_SRC
 sudo strip --remove-section=.note.ABI-tag /usr/lib/x86_64-linux-gnu/libQt5Core.so.5
 #+END_SRC
 
 *** no access to FTDI serial driver
 - add user to dialout group
 - change permissions in COM port
-#+BEGIN_SRC 
+#+BEGIN_SRC
 adduser $(whoami) dialout
 chmod 666 /dev/ttyS6
 #+END_SRC
@@ -159,3 +159,12 @@ chmod 666 /dev/ttyS6
 ** [[file:///C:/Users/manuel/projects/fpga/ice40-hx8k/docs/ice40-hx8k-b-evn-user-guide.pdf][FPGA]]
 The FPGA device in the baord is iCE40HX-8K-CT256, so options for nextpnr are --hx8k --package ct256, see [[http://www.clifford.at/icestorm/][link]]
 
+
+* FLOW
+** Compiler - ghdl -a
+   - link
+** Testing - VUNIT
+   - VUNIT with Python interface; [[https://vunit.github.io/py/ui.html][link]]
+** Simulation - ghdl -r
+*** Installation
+    pip install vunit-hdl

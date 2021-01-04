@@ -1,0 +1,18 @@
+# TITLE: UART TRANSMISSION
+* UART TRANSMISSION
+  - A port into VHDL of the Verilog example in https://github.com/nesl/ice40_examples/tree/master/uart_transmission
+* Workflow
+  - compiler and simulator; ghdl
+  - unittesting; vunit-hdl
+  - source control github
+  - CI; vunit_action on github
+  - sysnthesis
+** Directory structure
+Code will be separated in two directories
+
+| Directory | contents        |
+|-----------+-----------------|
+| ./        | run.py          |
+| src/      | VHDL sources    |
+| test/     | VHDL test bench |
+|-----------+-----------------|
