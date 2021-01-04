@@ -10,9 +10,13 @@
 ** Directory structure
 Code will be separated in two directories
 
-| Directory | contents        |
-|-----------+-----------------|
-| ./        | run.py          |
-| src/      | VHDL sources    |
-| test/     | VHDL test bench |
-|-----------+-----------------|
+| Directory | contents                    |
+|-----------+-----------------------------|
+| ./        | run.py                      |
+| src/      | VHDL sources                |
+| src/test/ | VHDL test bench for sources |
+|-----------+-----------------------------|
+
+*** Setting up Githuns CI actions
+   - [[http://vunit.github.io/blog/2020_08_12_continuous_integration_with_vunit_action_in_10_lines_of_code.html][reference vunit blog]]
+   - s
