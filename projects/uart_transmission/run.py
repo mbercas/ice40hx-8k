@@ -19,8 +19,6 @@ TEST_PATH = SRC_PATH / "test"
 vu.add_library("uart_lib").add_source_files(SRC_PATH / "*.vhd")
 vu.add_library("tb_uart_lib").add_source_files(TEST_PATH / "*.vhd")
 
-# Add all files ending in .vhd in current working directory to library
-lib.add_source_files("*.vhd")
 
 # Run vunit function
 vu.main()
