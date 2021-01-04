@@ -4,8 +4,12 @@
 Refresh my VHDL and make a workflow using
  - emacs (VHDL mode)
  - ghdl as compiler
+   + ghdl as simulation too
+   + gtkwave as waveform viewer
  - yosys as synthesis tool
  - iCE40-HX8K as development platform
+ 
+ - I also want to investigate unit testing of VHDL code and continuos integration using VUnit
 
 * Installing the toolchain
 
