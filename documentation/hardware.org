@@ -1,15 +1,15 @@
-#+TITLE: Hardware description Lattive iCE40
+#+TITLE: Hardware description Lattice iCE40
 
  - refs:
-   [[http://www.latticesemi.com/view_document?document_id=50373][Breakout board user guide]]
-   [[https://mjoldfield.com/atelier/2018/02/ice40-blinky-hx8k-breakout.html][mjoldfield.com]]
-   [[https://www.latticesemi.com/view_document?document_id=49312][iCE40 LX/HX family data sheet]]
+   + [[http://www.latticesemi.com/view_document?document_id=50373][Breakout board user guide - including schematics]]
+   + [[https://mjoldfield.com/atelier/2018/02/ice40-blinky-hx8k-breakout.html][mjoldfield.com]]
+   + [[https://www.latticesemi.com/view_document?document_id=49312][iCE40 LX/HX family data sheet]]
 
 * Breakout board
 
   Top level diagram
 
-  #+CAPTION: Block diagram of the iCE40HX-8k breakboard
+  #+CAPTION: Block diagram of the iCE40HX-8k breakout board (from mjoldfield.com)
   [[./ice40hx_8k_bb_block_diagram.png]]
 
 The pinout of the FPGA is defined in the [[https://www.latticesemi.com/view_document?document_id=49390][pinout]]; using the pinout create a [[../projects/leds/pinmap.pcf][pinmap]] file with the pins used in the project.
@@ -34,42 +34,78 @@ The pinout of the FPGA is defined in the [[https://www.latticesemi.com/view_docu
 Additionally LED D10 is connected to the CDONE signal and can be monitored to determine that the FPGA has been programmed correctly.
 
 #+CAPTION: Other LEDS
-   | Name   | Silkscreen |                |
-   |--------+------------+----------------|
-   | CDONE  | D10        | CDONE FPGA pin |
-   | PWR_ON | D11        | CDONE FPGA pin |
+   | Name   | Silkscreen |                         |
+   |--------+------------+-------------------------|
+   | CDONE  | D10        | CDONE FPGA pin          |
+   | PWR_ON | D11        | Power LED - 5V USB rail |
 
 ** Test points
 
-There are several test points in the baord.
+There are several test points in the board.
 
 #+CAPTION: Test points connected to the FPGA
-| Name | Silkscren | Pin |
-|------+-----------+-----|
-| TP4  | TP4       |     |
-| TP5  | TP5       |     |
-| TP6  | TP6       |     |
-| TP7  | TP7       |     |
-| TP8  | TP8       |     |
-| TP9  | TP9       |     |
-| TP10 | TP10      |     |
-| TP11 | TP11      |     |
-| TP12 | TP12      |     |
-| TP13 | TP13      |     |
-| TP14 | TP14      |     |
-| TP15 | TP15      |     |
+| Name | Silkscren | Pin                       |
+|------+-----------+---------------------------|
+| TP4  | TP4       | +3.3V pull up VCCIO0      |
+| TP5  | TP5       | VCCIO0 - IO voltage bank0 |
+| TP6  | TP6       | --                        |
+| TP7  | TP7       | --                        |
+| TP8  | TP8       | +3.3V pull up VCCIO1      |
+| TP9  | TP9       | VCCIO1 - IO voltage bank1 |
+| TP10 | TP10      | +3.3V pull up VCCIO2      |
+| TP11 | TP11      | VCCIO2 - IO voltage bank2 |
+| TP12 | TP12      | --                        |
+| TP13 | TP13      |                           |
+| TP14 | TP14      | +3.3V pull up VCCIO3      |
+| TP15 | TP15      | VCCIO3 - IO voltage bank3 |
+| TP16 | TP16      | CRESET                    |
+
 
 
 #+CAPTION: Other test points
 | Name | Silkscreen |                   |
 |------+------------+-------------------|
-| P1V2 | TP2        | 1.2V power supply |
+| +3.3 | TP1        | 3.3V power supply |
+| +1.2 | TP2        | 1.2V power supply |
 | GND  | TP3        | Ground            |
 
 
+** Headers
+
+ 
+
 ** FTDI FT2232H
 
-The breakboard communicates to the PC using a USB bridge from FTDI, the bridge can be used as RS323 or SPI
+The breakout board communicates to the PC using a USB bridge from FTDI, [[https://www.ftdichip.com/Support/Documents/DataSheets/ICs/DS_FT2232H.pdf][see data sheet]].
+The FT2232 is a bridge between USB and UART and SPI interfaces, in particular is exposes 2 SPI interfaces and
+2 RS232, but only the first SPI and first RS232 are wired.
+
+The bus AD connects to the Flash and FPGA configuration interface.
+
+| FT2232 BUS pin | Signal | schematic signal |
+|----------------+--------+------------------|
+| ADBUS0         | SCK    | iCE_SCK          |
+| ADBUS1         | SI     | FLASH_MOSI       |
+| ADBUS2         | SO     | FLASH_MISO       |
+| ADBUS4         | SS     | iCE_SS_B         |
+| ADBUS6         |        | iCE_CDONE        |
+| ADBUS7         |        | iCE_CRESET       |
+
+
+The RS232 interface is connected to bus BD
+
+| FT2232 BUS pin | Signal | schematic signal |
+|----------------+--------+------------------|
+| BDBUS0         |        | RS232_Rx_TTL     |
+| BDBUS1         |        | RS232_Tx_TTL     |
+| BDBUS2         |        | RTSn             |
+| BDBUS4         |        | CTSn             |
+| BDBUS5         |        | DTSn             |
+| BDBUS6         |        | DTRn             |
+| BDBUS7         |        | DCDn             |
+
+RS232 data rate is limited to 12Mbaud. 
+
 
 *** TODO How is the connection selected?
 
@@ -90,6 +126,7 @@ Since the FPGA has a PPL we can scale the incoming clock. Technical note [[http:
 ** Jumpers define the programming options
    There are two types of programming configuration
 *** SPI Flash mode
+  - There is a 32Mb Micron Flash with SPI interface that is used to store the program (N25Q032A13ESC40F - this part is EOL)
   - The FTDI SPI interface programs the flash memory; i.e. FPGA gets reconfigured after power up.
   - Jumper locations:
     + J7:1-2
@@ -99,3 +136,12 @@ Since the FPGA has a PPL we can scale the incoming clock. Technical note [[http:
   - Jumper locations:
     + J7: open
     + J6:3-4 J6:1-2
+
+** Power
+The board gets powered from the USB bus (+5V), the input voltage is fed to a regulator LT3030EFE,
+configured to generate the +3.3V and +1.2V rails.
+
+The board has a single ground plane.
+
+NOTE: the USB rail can carry 500mA current, this sets the limit of power that can be consumed
+in the board. Verify that the IO banks are configured not to use more power than provided.
