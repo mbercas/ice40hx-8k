@@ -7,7 +7,7 @@ Refresh my VHDL and make a workflow using
    + ghdl as simulation too
    + gtkwave as waveform viewer
  - yosys as synthesis tool
- - iCE40-HX8K as development platform
+ - iCE40-HX8K as development platform; [[./documentation/hardware.org][see hardware documents]]
  
  - I also want to investigate unit testing of VHDL code and continuos integration using VUnit
 
