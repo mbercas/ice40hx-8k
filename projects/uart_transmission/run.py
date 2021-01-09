@@ -9,7 +9,7 @@ from vunit import VUnit
 from pathlib import Path
 
 
-VUNIT_VHDL_STANDARD = "02"
+VUNIT_VHDL_STANDARD = "08"
 
 # Create VUnit instance by parsing command line arguments
 vu = VUnit.from_argv(vhdl_standard=VUNIT_VHDL_STANDARD)
