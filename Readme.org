@@ -10,6 +10,8 @@ Refresh my VHDL and make a workflow using
  - iCE40-HX8K as development platform; [[./documentation/hardware.org][see hardware documents]]
  
  - I also want to investigate unit testing of VHDL code and continuos integration using VUnit
+ [![](https://github.com/mbercas/ice40hx-8k/workflows/VUnit%20Tests/badge.svg)](https://github.com/mbercas/ice40hx-8k/actions)
+
 
 * Installing the toolchain
 
