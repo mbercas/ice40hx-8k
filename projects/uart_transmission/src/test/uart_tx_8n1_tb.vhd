@@ -24,11 +24,10 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
 library vunit_lib;
-
 -------------------------------------------------------------------------------
 
 entity uart_tx_8n1_tb is
-  generic (runner_cfg: string := runner_cfg_default);
+  generic (runner_cfg : string);
 end entity uart_tx_8n1_tb;
 
 -------------------------------------------------------------------------------
