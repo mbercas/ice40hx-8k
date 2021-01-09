@@ -82,37 +82,31 @@ The FT2232 is a bridge between USB and UART and SPI interfaces, in particular is
 
 The bus AD connects to the Flash and FPGA configuration interface.
 
-| FT2232 BUS pin | Signal | schematic signal |
-|----------------+--------+------------------|
-| ADBUS0         | SCK    | iCE_SCK          |
-| ADBUS1         | SI     | FLASH_MOSI       |
-| ADBUS2         | SO     | FLASH_MISO       |
-| ADBUS4         | SS     | iCE_SS_B         |
-| ADBUS6         |        | iCE_CDONE        |
-| ADBUS7         |        | iCE_CRESET       |
+| FT2232 BUS pin | Signal | FPGA Pin | schematic signal |
+|----------------+--------+----------+------------------|
+| ADBUS0         | SCK    | R11      | iCE_SCK          |
+| ADBUS1         | SI     | P11      | FLASH_MOSI       |
+| ADBUS2         | SO     | P12      | FLASH_MISO       |
+| ADBUS4         | SS     | R12      | iCE_SS_B         |
+| ADBUS6         |        | M10      | iCE_CDONE        |
+| ADBUS7         |        | N11      | iCE_CRESET       |
 
 
 The RS232 interface is connected to bus BD
 
-| FT2232 BUS pin | Signal | schematic signal |
-|----------------+--------+------------------|
-| BDBUS0         |        | RS232_Rx_TTL     |
-| BDBUS1         |        | RS232_Tx_TTL     |
-| BDBUS2         |        | RTSn             |
-| BDBUS4         |        | CTSn             |
-| BDBUS5         |        | DTSn             |
-| BDBUS6         |        | DTRn             |
-| BDBUS7         |        | DCDn             |
+| FT2232 BUS pin | FPGA Pin      | schematic signal |
+|----------------+---------------+------------------|
+| BDBUS0         | B10 (PIO0_14) | RS232_Rx_TTL     |
+| BDBUS1         | B12 (PIO0_13) | RS232_Tx_TTL     |
+| BDBUS2         | B31 (PIO0_09) | RTSn             |
+| BDBUS4         | A15 (PIO0_08) | CTSn             |
+| BDBUS5         | B14 (PIO0_03) | DSRn             |
+| BDBUS6         | A16 (PIO0_07) | DTRn             |
+| BDBUS7         | B15 (PIO0_01) | DCDn             |
 
 RS232 data rate is limited to 12Mbaud. 
 
 
-*** TODO How is the connection selected?
-
-| Name    | Silkscren | Pin |
-|---------+-----------+-----|
-| FTDI_TX |           | B12 |
-| FTDI_RX |           | B10 |
     
 ** Clock
 

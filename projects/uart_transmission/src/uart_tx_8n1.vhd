@@ -6,7 +6,7 @@
 -- Author     : Manuel Berrocal  <manuel@manuellaptop2>
 -- Company    : 
 -- Created    : 2021-01-02
--- Last update: 2021-01-02
+-- Last update: 2021-01-08
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -23,7 +23,7 @@ library ieee;
 use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 
-entity uart_tc_8n1 is
+entity uart_tx_8n1 is
 
   port (
     clk       : in  std_logic;                     -- input clock
@@ -33,9 +33,9 @@ entity uart_tc_8n1 is
     tx_done   : out std_logic;                     -- outgoing byte sent
     tx        : out std_logic);                    -- tx wire
 
-end entity uart_tc_8n1;
+end entity uart_tx_8n1;
 
-architecture behav of uart_tc_8n1 is
+architecture behav of uart_tx_8n1 is
 
   -- TX states for the state machine
   type TX_SM_STATE is (TX_SM_IDLE, TX_SM_START_TX, TX_SM_TXING,
@@ -80,7 +80,7 @@ begin  -- architecture behav
 
         -- send start bit (low)
         when TX_SM_START_TX =>
-          tx_bit <= '1';
+          tx_bit <= '0';
           state  <= TX_SM_TXING;
 
         -- clock data out

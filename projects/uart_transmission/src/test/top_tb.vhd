@@ -6,7 +6,7 @@
 -- Author     : Manuel Berrocal  <manuel@manuellaptop2>
 -- Company    :
 -- Created    : 2021-01-03
--- Last update: 2021-01-04
+-- Last update: 2021-01-08
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -32,7 +32,7 @@ library uart_lib;
 -------------------------------------------------------------------------------
 
 entity top_tb is
-
+  generic (runner_cfg: string := runner_cfg_default);
 end entity top_tb;
 
 -------------------------------------------------------------------------------
