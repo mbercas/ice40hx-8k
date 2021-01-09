@@ -6,7 +6,7 @@
 -- Author     : Manuel Berrocal  <manuel@manuellaptop2>
 -- Company    : 
 -- Created    : 2021-01-02
--- Last update: 2021-01-08
+-- Last update: 2021-01-09
 -- Platform   : 
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -40,12 +40,10 @@ architecture behav of uart_tx_8n1 is
   -- TX states for the state machine
   type TX_SM_STATE is (TX_SM_IDLE, TX_SM_START_TX, TX_SM_TXING,
                        TX_SM_TX_DONE, TX_SM_ERROR);  
-  signal state : TX_SM_STATE;
-
-  signal buf_tx    : std_logic_vector(7 downto 0);
-  signal tx_bit    : std_logic;
-
-  signal bits_sent : unsigned(4 downto 0);
+  signal state : TX_SM_STATE := TX_SM_IDLE;
+  signal buf_tx    : std_logic_vector(7 downto 0) := (others => '0');
+  signal tx_bit    : std_logic := '1';
+  signal bits_sent : unsigned(4 downto 0) := (others => '0');
  
 
 begin  -- architecture behav

@@ -6,7 +6,7 @@
 -- Author     : Manuel Berrocal  <manuel@manuellaptop2>
 -- Company    :
 -- Created    : 2021-01-03
--- Last update: 2021-01-08
+-- Last update: 2021-01-09
 -- Platform   :
 -- Standard   : VHDL'93/02
 -------------------------------------------------------------------------------
@@ -25,6 +25,7 @@ use ieee.std_logic_1164.all;
 library vunit_lib;
 use vunit_lib.check_pkg.all;
 use vunit_lib.logger_pkg.all;
+context vunit_lib.vunit_context;
 -- pragma translate_on
 
 library uart_lib;
@@ -32,7 +33,7 @@ library uart_lib;
 -------------------------------------------------------------------------------
 
 entity top_tb is
-  generic (runner_cfg: string := runner_cfg_default);
+  generic (runner_cfg: string);
 end entity top_tb;
 
 -------------------------------------------------------------------------------
@@ -72,12 +73,15 @@ begin  -- architecture behav
   -- waveform generation
   WaveGen_Proc: process
   begin
+    test_runner_setup(runner, runner_cfg);
     -- insert signal assignments here
 
-    wait until clk = '1';
+  
+    test_runner_cleanup(runner);
   end process WaveGen_Proc;
+  
 
-
+  --test_runner_watchdog(runner, 2 s);
 
 end architecture behav;
 
