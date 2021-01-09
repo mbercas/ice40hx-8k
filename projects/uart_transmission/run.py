@@ -18,16 +18,16 @@ SRC_PATH = Path(__file__).parent / "src"
 TEST_PATH = SRC_PATH / "test"
 
 
-
+vu.add_library("vunit_lib", allow_duplicate=True)
 
 # Create component library and testbench libary
 uart_lib = vu.add_library("uart_lib")
 uart_lib.add_source_files(SRC_PATH / "*.vhd")
-uart_lib.add_compile_option("ghdl.a_flags", ["--std=02"])
+#uart_lib.add_compile_option("ghdl.a_flags", ["--std=02"])
 
 uart_tb_lib = vu.add_library("tb_uart_lib")
 uart_tb_lib.add_source_files(TEST_PATH / "*.vhd")
-uart_tb_lib.add_compile_option("ghdl.a_flags", ["--std=02"])
+#uart_tb_lib.add_compile_option("ghdl.a_flags", ["--std=02"])
 
 
 # Run vunit function
